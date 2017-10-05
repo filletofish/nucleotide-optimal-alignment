@@ -62,7 +62,7 @@ def trace_back(first_chain, second_chain, matrix, gap_penalty = -1,  similarity 
 
         else:
             alignment_a = "-" + alignment_a
-            alignment_b = second_chain[i] + alignment_b
+            alignment_b = second_chain[j] + alignment_b
             j -= 1
 
 
