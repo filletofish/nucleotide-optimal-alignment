@@ -1,8 +1,7 @@
 import numpy as np
 import time
-
 import sys
-
+from scroring_functions import blosum_62_scoring
 
 def default_similarity_func(a, b):
     return 1 if a == b else -1
@@ -76,11 +75,12 @@ def main():
     chain_a_raw, chain_b_raw = str.split("\n")
     chain_a = np.array(list(chain_a_raw))
     chain_b = np.array(list(chain_b_raw))
-    matrix = fill_matrix(chain_a, chain_b)
+    matrix = fill_matrix(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
     print(matrix)
 
-    aligments = trace_back(chain_a, chain_b, matrix)
+    aligments = trace_back(chain_a, chain_b, matrix, gap_penalty=-5, similarity=blosum_62_scoring)
     print("Result\n", aligments[0], "\n", aligments[1])
+    f.close()
 
 
 if __name__ == "__main__":
