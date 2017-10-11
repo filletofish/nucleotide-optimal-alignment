@@ -14,8 +14,8 @@ def __nw_score_last_line(first_chain, second_chain, gap_penalty, similarity_func
     """
     len_first_chain = len(first_chain)
     len_second_chain = len(second_chain)
-    previous_row = [0] * (len_second_chain + 1)
-    current_row = [0] * (len_second_chain + 1)
+    previous_row = np.zeros(shape=(len_second_chain + 1), dtype=np.int)
+    current_row = np.zeros(shape=(len_second_chain + 1), dtype=np.int)
 
     for j in range(1, len_second_chain + 1):
         previous_row[j] = previous_row[j - 1] + gap_penalty
@@ -76,10 +76,10 @@ def __hirschberg(first_chain, second_chain, gap_penalty, similarity_func):
         row_right = __nw_score_last_line(first_chain[middle_first_chain:][::-1], second_chain[::-1], gap_penalty,
                                          similarity_func)
 
-        row_right.reverse()
+        reversed_row_right = row_right[::-1]
 
         # Getting maximum
-        row = [l + r for l, r in zip(row_left, row_right)]
+        row = [l + r for l, r in zip(row_left, reversed_row_right)]
         maxidx, maxval = max(enumerate(row), key=lambda a: a[1])
 
         middle_second_chain = maxidx
