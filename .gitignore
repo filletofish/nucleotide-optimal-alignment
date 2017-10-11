@@ -38,3 +38,4 @@ fabric.properties
 
 #Custom
 .idea/*
+*.pyc
