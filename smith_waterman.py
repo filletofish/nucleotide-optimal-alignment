@@ -57,29 +57,33 @@ def __trace_back(first_chain, second_chain, matrix, gap_penalty = -1,  similarit
     i = max_val_i
     j = max_val_j
     value = max_val
-    while i >= 0 or j >= 0:
-        if i >= 0 and j >= 0 and matrix[i + 1][j + 1] == matrix[i][j] + similarity(first_chain[i], second_chain[j]):
-            alignment_a = first_chain[i] + alignment_a
-            alignment_b = second_chain[j] + alignment_b
+    while (i > 0 or j > 0) and value != 0:
+        if i > 0 and j > 0 and matrix[i][j] == matrix[i-1][j-1] + similarity(first_chain[i - 1], second_chain[j - 1]):
+            alignment_a = first_chain[i - 1] + alignment_a
+            alignment_b = second_chain[j - 1] + alignment_b
             i -= 1
             j -= 1
-        elif i >= 0 and matrix[i+1][j+1] == matrix[i][j + 1] + gap_penalty:
+        elif i > 0 and matrix[i][j] == matrix[i - 1][j] + gap_penalty:
             alignment_a = first_chain[i] + alignment_a
             alignment_b = "-" + alignment_b
             i -= 1
 
         else:
             alignment_a = "-" + alignment_a
-            alignment_b = second_chain[j] + alignment_b
+            alignment_b = second_chain[j - 1] + alignment_b
             j -= 1
 
-        if value == 0:
-            break
-        else:
-            value = matrix[i][j]
+        value = matrix[i][j]
 
     return alignment_a, alignment_b
 
+
+# TGTTACGG
+# GGTTGACTA
+#
+# Result:
+# G T T - A C
+# G T T G A C
 
 def smith_waterman(chain_a, chain_b, gap_penalty = -1, similarity_func = default_similarity_func, print_matrix=False):
     matrix = __fill_matrix(chain_a, chain_b, gap_penalty=gap_penalty, similarity_func=similarity_func)
