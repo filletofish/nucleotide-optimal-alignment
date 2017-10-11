@@ -1,7 +1,5 @@
 import numpy as np
-
-def default_similarity_func(a, b):
-    return 1 if a == b else -1
+from scroring_functions import default_similarity_func
 
 
 def __fill_matrix(first_chain, second_chain, gap_penalty = -1, similarity_func = default_similarity_func):
