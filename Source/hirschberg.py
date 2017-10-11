@@ -1,5 +1,6 @@
 import numpy as np
-from needleman_wunsch import needleman_wunsch
+
+from Source.needleman_wunsch import needleman_wunsch
 
 
 def __nw_score_last_line(first_chain, second_chain, gap_penalty, similarity_func):
