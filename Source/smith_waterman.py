@@ -17,8 +17,8 @@ def __fill_matrix(first_chain, second_chain, gap_penalty = -1, similarity_func =
     for i in range(0, len(first_chain)):
         for j in range(0, len(second_chain)):
             match = matrix[i][j] + similarity_func(first_chain[i], second_chain[j])
-            delete = matrix[i][j + 1] + gap_penalty
-            insert = matrix[i + 1][j] + gap_penalty
+            delete = matrix[i + 1][j] + gap_penalty
+            insert = matrix[i][j + 1] + gap_penalty
             matrix[i + 1][j + 1] = max(match, delete, insert, 0)
 
     return matrix
