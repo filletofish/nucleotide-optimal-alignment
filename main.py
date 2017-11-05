@@ -17,15 +17,10 @@ def main():
     chain_b = np.array(list(chain_b_raw))
     # alignments = needleman_wunsch(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
     # alignments = hirschberg(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
-    #alignments = smith_waterman(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
+    # alignments = smith_waterman(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
 
     start_time = time.time()
-    alignments = optimized_needleman_wunsch(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
-    print("\nIn %s seconds" % (time.time() - start_time))
-    print("Result\n", alignments[0], "\n", alignments[1])
-
-    start_time = time.time()
-    alignments = needleman_wunsch(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
+    alignments = needleman_wunsch(chain_a, chain_b, similarity_func=blosum_62_scoring)
     print("\nNot optimizedIn %s seconds" % (time.time() - start_time))
     print("Result\n", alignments[0], "\n", alignments[1])
     f.close()
