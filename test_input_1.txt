@@ -1,2 +1,4 @@
+> Name1
 TGTTACGG
+> Name2
 GGTTGACTA
