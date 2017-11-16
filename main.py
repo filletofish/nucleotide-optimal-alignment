@@ -1,6 +1,4 @@
 import time
-
-import numpy as np
 import argparse
 
 from Source.scroring_functions import blosum_62_scoring
@@ -8,30 +6,29 @@ from Source.smith_waterman import smith_waterman
 from Source.hirschberg import hirschberg
 from Source.needleman_wunsch import needleman_wunsch
 from Source.optimized_needleman_wunsch import optimized_needleman_wunsch
+from Source.input_output import read_input
+from Source.input_output import print_output
 
 
-    f = open('test_input_1.txt', 'r')
-    str = f.read()
-    chain_a_raw, chain_b_raw = str.split("\n")
-    chain_a = np.array(list(chain_a_raw))
-    chain_b = np.array(list(chain_b_raw))
-    # alignments = needleman_wunsch(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
-    # alignments = hirschberg(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
-    # alignments = smith_waterman(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
 def main(filename, algorithm_type, gap_penalty_open, gap_penalty_extension):
+    assert algorithm_type == 'nw', 'Choosing other algs is not supported now'
 
-    start_time = time.time()
-    alignments = needleman_wunsch(chain_a, chain_b, similarity_func=blosum_62_scoring)
-    print("\nNot optimizedIn %s seconds" % (time.time() - start_time))
-    print("Result\n", alignments[0], "\n", alignments[1])
-    f.close()
+    with open(filename, 'r') as content_file:
+        content = content_file.read()
+        chains = read_input(content)
+        alignments, score = needleman_wunsch(chains[0].chain, chains[1].chain,
+                                             similarity_func=blosum_62_scoring,
+                                             gap_initial=gap_penalty_open,
+                                             gap_cont=gap_penalty_extension)
+        print_output(chains[0].name, chains[1].name, alignments[0], alignments[1], score)
 
+    # alignments, score = needleman_wunsch(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
+    # alignments = hirschberg(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
+    # alignments, score = smith_waterman(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
 
 
 if __name__ == "__main__":
-    start_time = time.time()
-    main()
-    print("\nIn %s seconds" % (time.time() - start_time))    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
     parser.add_argument('input', type=argparse.FileType(),
                         help='File containing 2 sequences in FASTA format',
                         nargs=1)
