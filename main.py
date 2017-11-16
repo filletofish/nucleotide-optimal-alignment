@@ -52,6 +52,5 @@ if __name__ == "__main__":
     algorithm_type = args.algorithm
     gap_penalty_open = args.ogap
     gap_penalty_extension = args.egap
-    print(filename, algorithm_type, gap_penalty_extension, gap_penalty_open)
 
     main(filename, algorithm_type, gap_penalty_open, gap_penalty_extension)
