@@ -81,11 +81,9 @@ def __trace_back(first_chain, second_chain, matrix, split_coefficient, gap_penal
 
 
 
-def optimized_needleman_wunsch(chain_a, chain_b, gap_penalty = -1, similarity_func = default_similarity_func, print_matrix=True):
+def optimized_needleman_wunsch(chain_a, chain_b, gap_penalty = -1, similarity_func = default_similarity_func):
     split_coefficient = int(max(len(chain_a), len(chain_b)) / 2)
     matrix = __fill_matrix(chain_a, chain_b, split_coefficient, gap_penalty=gap_penalty, similarity_func=similarity_func)
-    if print_matrix:
-        print(matrix)
-
     alignments = __trace_back(chain_a, chain_b, split_coefficient=split_coefficient, matrix=matrix, gap_penalty=gap_penalty, similarity=similarity_func)
-    return alignments
+    score = matrix[-1][-1]
+    return alignments, score
