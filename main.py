@@ -11,21 +11,37 @@ from Source.input_output import print_output
 
 
 def main(filename, algorithm_type, gap_penalty_open, gap_penalty_extension):
-    assert algorithm_type == 'nw', 'Choosing other algs is not supported now'
-
     with open(filename, 'r') as content_file:
         content = content_file.read()
         chains = read_input(content)
-        alignments, score = needleman_wunsch(chains[0].chain, chains[1].chain,
+
+        if algorithm_type == 'nw':
+
+            alignments, score = needleman_wunsch(chains[0].chain, chains[1].chain,
                                              similarity_func=blosum_62_scoring,
                                              gap_initial=gap_penalty_open,
                                              gap_cont=gap_penalty_extension)
+        elif algorithm_type == 'onw':
+            alignments, score = optimized_needleman_wunsch(chains[0].chain,
+                                                           chains[1].chain,
+                                                           gap_penalty=gap_penalty_extension,
+                                                           similarity_func=blosum_62_scoring)
+        elif algorithm_type == 'sw':
+            alignments, score = smith_waterman(chains[0].chain,
+                                               chains[1].chain,
+                                               gap_penalty=gap_penalty_extension,
+                                               similarity_func=blosum_62_scoring)
+        elif algorithm_type == 'hb':
+            alignments = hirschberg(chains[0].chain,
+                                           chains[1].chain,
+                                           gap_penalty=gap_penalty_extension,
+                                           similarity_func=blosum_62_scoring)
+            score = None
+
+        else:
+            assert False, 'Wrong algorythm type'
+
         print_output(chains[0].name, chains[1].name, alignments[0], alignments[1], score)
-
-    # alignments, score = needleman_wunsch(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
-    # alignments = hirschberg(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
-    # alignments, score = smith_waterman(chain_a, chain_b, gap_penalty=-5, similarity_func=blosum_62_scoring)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

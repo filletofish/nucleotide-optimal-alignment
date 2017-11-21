@@ -10,8 +10,25 @@ def read_input(data):
 
 
 def print_output(name_chain_a, name_chain_b, aligned_chain_seq_a, aligned_chain_seq_b, score):
-    print("Score: ", score)
-    print(name_chain_a)
-    print(name_chain_b)
-    print(aligned_chain_seq_a)
-    print(aligned_chain_seq_b)
+    if score is not None:
+        print("Score: ", score)
+
+    while len(name_chain_a) > 10 and len(name_chain_b) > 10:
+        print("1: " + name_chain_a[:10])
+        print("2: " + name_chain_b[:10])
+
+        name_chain_a = name_chain_a[10:]
+        name_chain_b = name_chain_b[10:]
+    print("1: " + name_chain_a)
+    print("2: " + name_chain_b)
+
+    print("\nAligned:\n")
+
+    while len(aligned_chain_seq_a) > 10 and len(aligned_chain_seq_b) > 10:
+        print("1: " + aligned_chain_seq_a[:10])
+        print("2: " + aligned_chain_seq_b[:10])
+        aligned_chain_seq_a = aligned_chain_seq_a[10:]
+        aligned_chain_seq_b = aligned_chain_seq_b[10:]
+        print("")
+    print("1: " + aligned_chain_seq_a)
+    print("2: " + aligned_chain_seq_b)

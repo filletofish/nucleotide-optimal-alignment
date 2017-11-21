@@ -1,4 +1,5 @@
 import numpy as np
+from Source.scroring_functions import blosum_62_scoring
 
 from Source.needleman_wunsch import needleman_wunsch
 
@@ -63,9 +64,11 @@ def __hirschberg(first_chain, second_chain, gap_penalty, similarity_func):
             second_aligned.append("-" * len(first_chain[i]))
 
     elif length_first_chain == 1 or length_second_chain == 1:
-        first_aligned, second_aligned = needleman_wunsch(first_chain, second_chain,
-                                                         gap_penalty=gap_penalty,
-                                                         similarity_func=similarity_func)
+        alignments, score = needleman_wunsch(first_chain, second_chain,
+                                                         similarity_func=blosum_62_scoring,
+                                                         gap_initial=gap_penalty,
+                                                         gap_cont=gap_penalty)
+        first_aligned, second_aligned = alignments[0], alignments[1]
 
     else:
 
@@ -90,11 +93,11 @@ def __hirschberg(first_chain, second_chain, gap_penalty, similarity_func):
         aligned_first_left, aligned_second_left = __hirschberg(first_chain[:middle_first_chain],
                                                                second_chain[:middle_second_chain], gap_penalty,
                                                                similarity_func)
-        algined_first_right, aligned_second_right = __hirschberg(first_chain[middle_first_chain:],
+        aligned_first_right, aligned_second_right = __hirschberg(first_chain[middle_first_chain:],
                                                                  second_chain[middle_second_chain:], gap_penalty,
                                                                  similarity_func)
 
-        first_aligned = list(aligned_first_left) + list(algined_first_right)
+        first_aligned = list(aligned_first_left) + list(aligned_first_right)
         second_aligned = list(aligned_second_left) + list(aligned_second_right)
 
     return "".join(first_aligned), "".join(second_aligned)
