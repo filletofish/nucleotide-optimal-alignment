@@ -1,0 +1,12 @@
+> Name1
+AABCD
+> Name2
+AABD
+> Name3
+ABD
+> Name4
+AABC
+> Name5
+AADD
+> Name5
+AABDD
