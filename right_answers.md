@@ -1,52 +1,60 @@
 ## NW
 
-open penalty: 5
-extend penalty: 5
+open penalty: **5.0**
+extend penalty: **5.0**
 
+```
 >test1
 SPETVIHSGWVIWRELFSHWPDQCKLLFGDWFAWIHWTYLVYYSAGPPCQGQSDIVVMMQKKLRTNFCQCYKYWYQ
 >test2
 SPSDQFFTVIHSCLYWVIWRDLMSHLFMNGAAIDIHWTWDSIAIGPPLVYPIEEVFAGPSTIVVMMQKMLRTNFCQCYKPWYQ
+```
 
-Score: 161.0
+Score: **161.0**
 
 https://www.ebi.ac.uk/Tools/services/web/toolresult.ebi?jobId=emboss_needle-I20171220-123841-0017-29274646-p2m
 
 ## SW
-open penalty: 5
-extend penalty: 5
+open penalty: **5.0**
+extend penalty: **5.0**
 
+```
 >test1
 SPETVIHSGWVIWRELFSHWPDQCKLLFGDWFAWIHWTYLVYYSAGPPCQGQSDIVVMMQKKLRTNFCQCYKYWYQ
 >test2
 SPSDQFFTVIHSCLYWVIWRDLMSHLFMNGAAIDIHWTWDSIAIGPPLVYPIEEVFAGPSTIVVMMQKMLRTNFCQCYKPWYQ
+```
 
-Score: 168.0
+Score: **168.0**
 
 https://www.ebi.ac.uk/Tools/services/web/toolresult.ebi?jobId=emboss_water-I20171220-124225-0441-32550539-pg
 
 ## NW with affine gaps - 1
-open penalty: 5
-extend penalty: 1
+open penalty: **5.0**
+extend penalty: **1.0**
 
+```
 >test1
 SPETVIHSGWVIWRELFSHWPDQCKLLFGDWFAWIHWTYLVYYSAGPPCQGQSDIVVMMQKKLRTNFCQCYKYWYQ
 >test2
 SPSDQFFTVIHSCLYWVIWRDLMSHLFMNGAAIDIHWTWDSIAIGPPLVYPIEEVFAGPSTIVVMMQKMLRTNFCQCYKPWYQ
+```
 
-Score: 208
+Score: **208.0**
 https://www.ebi.ac.uk/Tools/services/web/toolresult.ebi?jobId=emboss_needle-I20171220-123630-0951-85953949-p2m
 
 ## NW with affine gaps - 2
 
-open penalty: 10
-extend penalty: 5
+open penalty: **10.0**
+extend penalty: **5.0**
 
+```
 >test1
 SPETVIHSGWVIWRELFSHWPDQCKLLFGDWFAWIHWTYLVYYSAGPPCQGQSDIVVMMQKKLRTNFCQCYKYWYQ
 >test2
 SPSDQFFTVIHSCLYWVIWRDLMSHLFMNGAAIDIHWTWDSIAIGPPLVYPIEEVFAGPSTIVVMMQKMLRTNFCQCYKPWYQ
+```
 
-Score: 134
+Score: **134.0**
 
 https://www.ebi.ac.uk/Tools/services/web/toolresult.ebi?jobId=emboss_needle-I20171220-145102-0436-8691974-pg
