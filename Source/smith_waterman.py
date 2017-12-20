@@ -17,8 +17,8 @@ def __fill_matrix(first_chain, second_chain, gap_penalty = -1, similarity_func =
     for i in range(0, len(first_chain)):
         for j in range(0, len(second_chain)):
             match = matrix[i][j] + similarity_func(first_chain[i], second_chain[j])
-            delete = matrix[i + 1][j] + gap_penalty
-            insert = matrix[i][j + 1] + gap_penalty
+            delete = matrix[i + 1][j] - gap_penalty
+            insert = matrix[i][j + 1] - gap_penalty
             matrix[i + 1][j + 1] = max(match, delete, insert, 0)
 
     return matrix
@@ -65,7 +65,7 @@ def __trace_back(first_chain, second_chain, matrix, gap_penalty = -1,  similarit
             i -= 1
             j -= 1
         elif i > 0 and matrix[i][j] == matrix[i - 1][j] + gap_penalty:
-            alignment_a = first_chain[i] + alignment_a
+            alignment_a = first_chain[i - 1] + alignment_a
             alignment_b = "-" + alignment_b
             i -= 1
 
@@ -86,7 +86,7 @@ def __trace_back(first_chain, second_chain, matrix, gap_penalty = -1,  similarit
 # G T T - A C
 # G T T G A C
 
-def smith_waterman(chain_a, chain_b, gap_penalty = -1, similarity_func = default_similarity_func, print_matrix=False):
+def smith_waterman(chain_a, chain_b, gap_penalty = 1, similarity_func = default_similarity_func, print_matrix=False):
     matrix = __fill_matrix(chain_a, chain_b, gap_penalty=gap_penalty, similarity_func=similarity_func)
     alignments = __trace_back(chain_a, chain_b, matrix, gap_penalty=gap_penalty, similarity=similarity_func)
     score = matrix[-1][-1]
