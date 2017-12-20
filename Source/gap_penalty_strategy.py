@@ -11,11 +11,11 @@ class GapPenaltyStrategy:
 
     def get_delete_gap_penalty(self, i, j):
         length = self.delete_length_matrix[i][j-1]
-        return self.initial_penalty + length * self.continuous_penalty
+        return self.initial_penalty if length == 0 else self.continuous_penalty
 
     def get_insert_gap_penalty(self, i, j):
         length = self.insert_length_matrix[i-1][j]
-        return self.initial_penalty + length * self.continuous_penalty
+        return self.initial_penalty if length == 0 else self.continuous_penalty
 
     def record_delete_gap_penalty(self, i, j):
         self.delete_length_matrix[i][j] = self.delete_length_matrix[i][j-1] + 1
